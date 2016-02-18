@@ -1,15 +1,14 @@
-//
-//  ViewController.h
-//  WatchToDrone
-//
-//  Created by Matt Wanninger on 2/18/16.
-//  Copyright © 2016 Jackrabbit Mobile. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
+#import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
 
-@interface ViewController : UIViewController
+@interface CellData : NSObject
 
+@property (nonatomic, strong) ARService* service;
+@property (nonatomic, strong) NSString* name;
 
 @end
 
+@interface ViewController : UIViewController
+
+@end

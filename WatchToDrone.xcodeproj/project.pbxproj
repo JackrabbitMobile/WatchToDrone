@@ -334,6 +334,7 @@
 				TargetAttributes = {
 					DD6C1FE11C762DCC00212B17 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = DB34EU8XZ5;
 					};
 					DD6C1FFA1C762DCD00212B17 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -650,8 +651,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphoneos/staging/usr/include\"";
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphonesimulator/staging/usr/include\"";
 				INFOPLIST_FILE = WatchToDrone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphoneos/staging/usr/lib\"";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphonesimulator/staging/usr/lib\"";
+				OTHER_LDFLAGS = (
+					"-larnetworkal",
+					"-larnetwork",
+					"-lardiscovery",
+					"-larcontroller",
+					"-larcommands",
+					"-larsal",
+					"-larstream",
+					"-larstream2",
+					"-larmavlink",
+					"-ljson",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDrone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -661,8 +681,27 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphonesimulator/staging/usr/include\"";
+				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphonesimulator/staging/usr/include\"";
 				INFOPLIST_FILE = WatchToDrone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8/iOS-iphoneos/staging/usr/lib\"";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8/iOS-iphoneos/staging/usr/lib\"";
+				OTHER_LDFLAGS = (
+					"-larnetworkal",
+					"-larnetwork",
+					"-lardiscovery",
+					"-larcontroller",
+					"-larcommands",
+					"-larsal",
+					"-larstream",
+					"-larstream2",
+					"-larmavlink",
+					"-ljson",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDrone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
