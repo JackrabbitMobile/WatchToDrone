@@ -22,6 +22,8 @@
 		DD6C20251C762DCD00212B17 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C20241C762DCD00212B17 /* InterfaceController.m */; };
 		DD6C20281C762DCD00212B17 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C20271C762DCD00212B17 /* ExtensionDelegate.m */; };
 		DD6C202A1C762DCD00212B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6C20291C762DCD00212B17 /* Assets.xcassets */; };
+		DD6C20411C76443D00212B17 /* PilotingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C20401C76443D00212B17 /* PilotingViewController.m */; };
+		DD6C20441C764BB000212B17 /* DroneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C20431C764BB000212B17 /* DroneManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,10 @@
 		DD6C20271C762DCD00212B17 /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
 		DD6C20291C762DCD00212B17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD6C202B1C762DCD00212B17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD6C203F1C76443D00212B17 /* PilotingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PilotingViewController.h; sourceTree = "<group>"; };
+		DD6C20401C76443D00212B17 /* PilotingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PilotingViewController.m; sourceTree = "<group>"; };
+		DD6C20421C764BB000212B17 /* DroneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneManager.h; sourceTree = "<group>"; };
+		DD6C20431C764BB000212B17 /* DroneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +179,10 @@
 				DD6C1FE91C762DCD00212B17 /* AppDelegate.m */,
 				DD6C1FEB1C762DCD00212B17 /* ViewController.h */,
 				DD6C1FEC1C762DCD00212B17 /* ViewController.m */,
+				DD6C203F1C76443D00212B17 /* PilotingViewController.h */,
+				DD6C20401C76443D00212B17 /* PilotingViewController.m */,
+				DD6C20421C764BB000212B17 /* DroneManager.h */,
+				DD6C20431C764BB000212B17 /* DroneManager.m */,
 				DD6C1FEE1C762DCD00212B17 /* Main.storyboard */,
 				DD6C1FF11C762DCD00212B17 /* Assets.xcassets */,
 				DD6C1FF31C762DCD00212B17 /* LaunchScreen.storyboard */,
@@ -423,7 +433,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD6C20411C76443D00212B17 /* PilotingViewController.m in Sources */,
 				DD6C1FED1C762DCD00212B17 /* ViewController.m in Sources */,
+				DD6C20441C764BB000212B17 /* DroneManager.m in Sources */,
 				DD6C1FEA1C762DCD00212B17 /* AppDelegate.m in Sources */,
 				DD6C1FE71C762DCD00212B17 /* main.m in Sources */,
 			);

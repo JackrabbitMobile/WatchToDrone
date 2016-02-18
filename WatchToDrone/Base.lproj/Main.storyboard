@@ -21,7 +21,7 @@
             </objects>
             <point key="canvasLocation" x="-660" y="507"/>
         </scene>
-        <!--View Controller-->
+        <!--WatchToDrone-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
@@ -34,7 +34,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="a1x-tx-f1v">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="vBo-6x-Jfh"/>
@@ -45,19 +45,38 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="a1x-tx-f1v" secondAttribute="bottom" id="Iz5-Ta-GLt"/>
-                            <constraint firstItem="a1x-tx-f1v" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="bPU-et-aOf"/>
+                            <constraint firstItem="a1x-tx-f1v" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="UQm-lu-T1X"/>
                             <constraint firstAttribute="trailing" secondItem="a1x-tx-f1v" secondAttribute="trailing" id="cHf-Ry-00d"/>
                             <constraint firstItem="a1x-tx-f1v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="gkp-Rh-xMO"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="ehH-gz-mRF"/>
+                    <navigationItem key="navigationItem" title="WatchToDrone" id="ehH-gz-mRF"/>
                     <connections>
                         <outlet property="tableView" destination="a1x-tx-f1v" id="STL-1A-Qvh"/>
+                        <segue destination="QT5-BH-UcP" kind="show" identifier="pilotingSegue" id="0zg-Td-usS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="83" y="507"/>
+        </scene>
+        <!--Piloting View Controller-->
+        <scene sceneID="gsF-cD-yyQ">
+            <objects>
+                <viewController id="QT5-BH-UcP" customClass="PilotingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XkR-cV-Nyd"/>
+                        <viewControllerLayoutGuide type="bottom" id="tG2-Kl-MDN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BmE-v9-Bd0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bb9-d5-ofP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="735" y="507"/>
         </scene>
     </scenes>
 </document>

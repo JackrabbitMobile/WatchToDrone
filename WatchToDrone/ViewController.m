@@ -1,5 +1,6 @@
 
 #import "ViewController.h"
+#import "PilotingViewController.h"
 #import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
 
 @import WatchConnectivity;
@@ -55,12 +56,12 @@
     [[ARDiscovery sharedInstance] stop];
 }
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if(([segue.identifier isEqualToString:@"pilotingSegue"]) && (self.serviceSelected != nil)) {
-//        PilotingViewController *pilotingViewController = (PilotingViewController *)[segue destinationViewController];
-//        [pilotingViewController setService:self.serviceSelected];
-//    }
-//}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if(([segue.identifier isEqualToString:@"pilotingSegue"]) && (self.serviceSelected != nil)) {
+        PilotingViewController *pilotingViewController = (PilotingViewController *)[segue destinationViewController];
+        [pilotingViewController setService:self.serviceSelected];
+    }
+}
 
 
 #pragma mark - Notification methods
@@ -123,6 +124,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    }
     cell.textLabel.text = [(CellData *)[self.tableData objectAtIndex:indexPath.row] name];
     return cell;
 }
