@@ -9,6 +9,6 @@
 
 @end
 
-@interface ViewController : UIViewController
+@interface DroneListViewController : UIViewController
 
 @end

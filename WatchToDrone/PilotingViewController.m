@@ -9,7 +9,7 @@
 void stateChanged (eARCONTROLLER_DEVICE_STATE newState, eARCONTROLLER_ERROR error, void *customData);
 void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DICTIONARY_ELEMENT_t *elementDictionary, void *customData);
 
-@interface PilotingViewController ()
+@interface PilotingViewController () <WCSessionDelegate>
 
 @property (nonatomic) ARCONTROLLER_Device_t *deviceController;
 @property (nonatomic) dispatch_semaphore_t stateSem;
@@ -28,6 +28,12 @@ void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DI
     self.stateSem = dispatch_semaphore_create(0);
     
     self.alertController = [UIAlertController alertControllerWithTitle:[self.service name] message:@"Connecting.." preferredStyle:UIAlertControllerStyleAlert];
+    
+    if ([WCSession isSupported]) {
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,33 +55,124 @@ void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DI
     [self createDeviceControllerWithService:self.service];
 }
 
-- (ARDISCOVERY_Device_t *)createDiscoveryDeviceWithService:(ARService*)service {
-    ARDISCOVERY_Device_t *device = NULL;
-    
-    eARDISCOVERY_ERROR errorDiscovery = ARDISCOVERY_OK;
-    
-    NSLog(@"- Init discovery device  ... ");
-    
-    device = ARDISCOVERY_Device_New (&errorDiscovery);
-    if ((errorDiscovery != ARDISCOVERY_OK) || (device == NULL)) {
-        NSLog(@"device : %p", device);
-        NSLog(@"Discovery error :%s", ARDISCOVERY_Error_ToString(errorDiscovery));
+- (void)viewDidDisappear:(BOOL)animated {
+    if (self.alertController && !self.alertController.isBeingPresented) {
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
+    self.alertController = [UIAlertController alertControllerWithTitle:[self.service name] message:@"Disconnecting.." preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:self.alertController animated:YES completion:nil];
     
-    if (errorDiscovery == ARDISCOVERY_OK) {
-        // get the ble service from the ARService
-        ARBLEService* bleService = service.service;
+    // in background
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        eARCONTROLLER_ERROR error = ARCONTROLLER_OK;
         
-        // create a discovery device (ARDISCOVERY_PRODUCT_MINIDRONE)
-        errorDiscovery = ARDISCOVERY_Device_InitBLE (device, ARDISCOVERY_PRODUCT_MINIDRONE, (__bridge ARNETWORKAL_BLEDeviceManager_t)(bleService.centralManager), (__bridge ARNETWORKAL_BLEDevice_t)(bleService.peripheral));
-        
-        if (errorDiscovery != ARDISCOVERY_OK) {
-            NSLog(@"Discovery error :%s", ARDISCOVERY_Error_ToString(errorDiscovery));
+        // if the device controller is not stopped, stop it
+        eARCONTROLLER_DEVICE_STATE state = ARCONTROLLER_Device_GetState(_deviceController, &error);
+        if ((error == ARCONTROLLER_OK) && (state != ARCONTROLLER_DEVICE_STATE_STOPPED)) {
+            // after that, stateChanged should be called soon
+            error = ARCONTROLLER_Device_Stop (_deviceController);
+            
+            if (error != ARCONTROLLER_OK) {
+                NSLog(@"- error :%s", ARCONTROLLER_Error_ToString(error));
+            }
+            else {
+                // wait for the state to change to stopped
+                NSLog(@"- wait new state ... ");
+                dispatch_semaphore_wait(_stateSem, DISPATCH_TIME_FOREVER);
+            }
         }
-    }
-    
-    return device;
+        
+        // once the device controller is stopped, we can delete it
+        if (_deviceController != NULL) {
+            ARCONTROLLER_Device_Delete(&_deviceController);
+        }
+        
+        // dismiss the alert view in main thread
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self dismissViewControllerAnimated:NO completion:nil];
+        });
+    });
 }
+
+#pragma mark WCSessionDelegate methods
+
+- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message {
+    if ((message[@"watchAccData"]) != nil) {
+        
+        // Incoming accelerometer data
+        NSString *dataString = message[@"watchAccData"];
+        NSArray *components = [dataString componentsSeparatedByString:@","];
+        double x = [components[0] doubleValue];
+        double y = [components[1] doubleValue];
+        double z = [components[2] doubleValue];
+        NSLog(@"X:%f Y:%f Z:%f",x,y,z);
+        
+        
+    } else if (message[@"workoutState"]) {
+        NSLog(@"New HKWorkoutSession state: %@",message[@"workoutState"]);
+    } else if (message[@"error"]) {
+        NSLog(@"Error: %@",message[@"error"]);
+    }
+//    if ((message[@"request"]) != nil) {
+//        NSString *dataString = message[@"request"];
+//        NSArray *components = [dataString componentsSeparatedByString:@","];
+//        double x = [components[0] doubleValue];
+//        double y = [components[1] doubleValue];
+//        double z = [components[2] doubleValue];
+//        NSLog(@"x:%f y:%f z:%f",x,y,z);
+//        DroneState newState = [self.gestureRecognizer detectStateWithX:x y:y z:z];
+//        if (newState == DroneStateTakeOffOrLand && self.currentState != DroneStateTakeOffOrLand) {
+//            if (!self.hasTakenOff) {
+//                [self takeOff];
+//                self.hasTakenOff = YES;
+//            } else {
+//                [self land];
+//                self.hasTakenOff = NO;
+//            }
+//            self.currentState = DroneStateTakeOffOrLand;
+//        } else if (newState == DroneStateForward && self.currentState != DroneStateForward && self.hasTakenOff) {
+//            [self goToHover];
+//            [self pitchForwardTouchDown:nil];
+//            NSLog(@"sent forward command");
+//            self.currentState = DroneStateForward;
+//        } else if (newState == DroneStateBackward && self.currentState != DroneStateBackward && self.hasTakenOff) {
+//            [self goToHover];
+//            [self pitchBackTouchDown:nil];
+//            NSLog(@"sent backward command");
+//            self.currentState = DroneStateBackward;
+//        } else if (newState == DroneStateLeftRoll && self.currentState != DroneStateLeftRoll && self.hasTakenOff) {
+//            [self goToHover];
+//            [self rollLeftTouchDown:nil];
+//            NSLog(@"sent left command");
+//            self.currentState = DroneStateLeftRoll;
+//        } else if (newState == DroneStateRightRoll && self.currentState != DroneStateRightRoll && self.hasTakenOff) {
+//            [self goToHover];
+//            [self rollRightTouchDown:nil];
+//            NSLog(@"sent right command");
+//            self.currentState = DroneStateRightRoll;
+//        } else if (newState == DroneStateClimb && self.currentState != DroneStateClimb && self.hasTakenOff) {
+//            [self goToHover];
+//            [self gazUpTouchDown:nil];
+//            NSLog(@"sent up command");
+//            self.currentState = DroneStateClimb;
+//        } else if (newState == DroneStateDescend && self.currentState != DroneStateDescend && self.hasTakenOff) {
+//            [self goToHover];
+//            NSLog(@"sent down command");
+//            [self gazDownTouchDown:nil];
+//            self.currentState = DroneStateDescend;
+//        } else if ((newState == DroneStateHover || newState == DroneStateUnknown) && self.currentState != DroneStateHover && self.hasTakenOff) {
+//            [self goToHover];
+//            self.currentState = DroneStateHover;
+//        } else {
+//            self.currentState = DroneStateUnknown;
+//        }
+//    }
+//    
+}
+
+
+
+#pragma mark Device controller callbacks
 
 - (void)createDeviceControllerWithService:(ARService*)service {
     // first get a discovery device
@@ -132,50 +229,38 @@ void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DI
     }
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    if (self.alertController && !self.alertController.isBeingPresented) {
-        [self dismissViewControllerAnimated:NO completion:nil];
-    }
-    self.alertController = [UIAlertController alertControllerWithTitle:[self.service name] message:@"Disconnecting.." preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:self.alertController animated:YES completion:nil];
+- (ARDISCOVERY_Device_t *)createDiscoveryDeviceWithService:(ARService*)service {
+    ARDISCOVERY_Device_t *device = NULL;
     
-    // in background
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        eARCONTROLLER_ERROR error = ARCONTROLLER_OK;
+    eARDISCOVERY_ERROR errorDiscovery = ARDISCOVERY_OK;
+    
+    NSLog(@"- Init discovery device  ... ");
+    
+    device = ARDISCOVERY_Device_New (&errorDiscovery);
+    if ((errorDiscovery != ARDISCOVERY_OK) || (device == NULL)) {
+        NSLog(@"device : %p", device);
+        NSLog(@"Discovery error :%s", ARDISCOVERY_Error_ToString(errorDiscovery));
+    }
+    
+    if (errorDiscovery == ARDISCOVERY_OK) {
+        // get the ble service from the ARService
+        ARBLEService* bleService = service.service;
         
-        // if the device controller is not stopped, stop it
-        eARCONTROLLER_DEVICE_STATE state = ARCONTROLLER_Device_GetState(_deviceController, &error);
-        if ((error == ARCONTROLLER_OK) && (state != ARCONTROLLER_DEVICE_STATE_STOPPED)) {
-            // after that, stateChanged should be called soon
-            error = ARCONTROLLER_Device_Stop (_deviceController);
-            
-            if (error != ARCONTROLLER_OK) {
-                NSLog(@"- error :%s", ARCONTROLLER_Error_ToString(error));
-            }
-            else {
-                // wait for the state to change to stopped
-                NSLog(@"- wait new state ... ");
-                dispatch_semaphore_wait(_stateSem, DISPATCH_TIME_FOREVER);
-            }
+        // create a discovery device (ARDISCOVERY_PRODUCT_MINIDRONE)
+        errorDiscovery = ARDISCOVERY_Device_InitBLE (device, ARDISCOVERY_PRODUCT_MINIDRONE, (__bridge ARNETWORKAL_BLEDeviceManager_t)(bleService.centralManager), (__bridge ARNETWORKAL_BLEDevice_t)(bleService.peripheral));
+        
+        if (errorDiscovery != ARDISCOVERY_OK) {
+            NSLog(@"Discovery error :%s", ARDISCOVERY_Error_ToString(errorDiscovery));
         }
-        
-        // once the device controller is stopped, we can delete it
-        if (_deviceController != NULL) {
-            ARCONTROLLER_Device_Delete(&_deviceController);
-        }
-        
-        // dismiss the alert view in main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:NO completion:nil];
-        });
-    });
+    }
+    
+    return device;
 }
 
 - (void)goBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark Device controller callbacks
 // called when the state of the device controller has changed
 void stateChanged (eARCONTROLLER_DEVICE_STATE newState, eARCONTROLLER_ERROR error, void *customData) {
     PilotingViewController *pilotingViewController = (__bridge PilotingViewController *)customData;

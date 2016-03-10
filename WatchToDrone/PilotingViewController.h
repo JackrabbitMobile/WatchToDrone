@@ -1,8 +1,8 @@
 
-#import "ViewController.h"
+#import "DroneListViewController.h"
 #import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
 
-@interface PilotingViewController : ViewController
+@interface PilotingViewController : UIViewController
 
 /**
     The service we want to connect with (in this sample, the service is an ARBLEService).

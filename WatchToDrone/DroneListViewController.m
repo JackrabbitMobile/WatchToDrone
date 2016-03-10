@@ -1,5 +1,5 @@
 
-#import "ViewController.h"
+#import "DroneListViewController.h"
 #import "PilotingViewController.h"
 #import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
 
@@ -11,7 +11,7 @@
 @implementation CellData
 @end
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource,WCSessionDelegate>
+@interface DroneListViewController () <UITableViewDelegate, UITableViewDataSource,WCSessionDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) ARService *serviceSelected;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation ViewController
+@implementation DroneListViewController
 
 
 #pragma mark - View lifecycle

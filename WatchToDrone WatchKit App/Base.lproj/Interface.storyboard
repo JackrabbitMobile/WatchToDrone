@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6221" systemVersion="13E28" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6213"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9515"/>
     </dependencies>
     <scenes>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModuleProvider=""/>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController">
+                    <items>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Start Session" id="qgp-Et-cfG">
+                            <connections>
+                                <action selector="sessionButtonTapped:" destination="AgC-eL-Hgc" id="ujd-WZ-vjP"/>
+                            </connections>
+                        </button>
+                        <label alignment="center" text="Readings" id="kWd-iX-9La"/>
+                        <label alignment="left" text="X: n/a" id="xCa-fg-7hD"/>
+                        <label alignment="left" text="Y: n/a" id="Atb-R1-vOS"/>
+                        <label alignment="left" text="Z: n/a" id="yFF-iP-MNe"/>
+                    </items>
+                    <connections>
+                        <outlet property="sessionButton" destination="qgp-Et-cfG" id="ehk-ax-axZ"/>
+                        <outlet property="xLabel" destination="xCa-fg-7hD" id="nwl-HW-sPG"/>
+                        <outlet property="yLabel" destination="Atb-R1-vOS" id="NRf-cS-2iZ"/>
+                        <outlet property="zLabel" destination="yFF-iP-MNe" id="Sv9-7S-FOx"/>
+                    </connections>
+                </controller>
             </objects>
         </scene>
     </scenes>

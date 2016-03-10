@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		DD6C1FE71C762DCD00212B17 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C1FE61C762DCD00212B17 /* main.m */; };
 		DD6C1FEA1C762DCD00212B17 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C1FE91C762DCD00212B17 /* AppDelegate.m */; };
-		DD6C1FED1C762DCD00212B17 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C1FEC1C762DCD00212B17 /* ViewController.m */; };
+		DD6C1FED1C762DCD00212B17 /* DroneListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C1FEC1C762DCD00212B17 /* DroneListViewController.m */; };
 		DD6C1FF01C762DCD00212B17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6C1FEE1C762DCD00212B17 /* Main.storyboard */; };
 		DD6C1FF21C762DCD00212B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6C1FF11C762DCD00212B17 /* Assets.xcassets */; };
 		DD6C1FF51C762DCD00212B17 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6C1FF31C762DCD00212B17 /* LaunchScreen.storyboard */; };
-		DD6C20001C762DCD00212B17 /* WatchToDroneTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C1FFF1C762DCD00212B17 /* WatchToDroneTests.m */; };
-		DD6C200B1C762DCD00212B17 /* WatchToDroneUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C200A1C762DCD00212B17 /* WatchToDroneUITests.m */; };
 		DD6C20101C762DCD00212B17 /* WatchToDrone WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = DD6C200F1C762DCD00212B17 /* WatchToDrone WatchKit App.app */; };
 		DD6C20161C762DCD00212B17 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD6C20141C762DCD00212B17 /* Interface.storyboard */; };
 		DD6C20181C762DCD00212B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6C20171C762DCD00212B17 /* Assets.xcassets */; };
@@ -23,24 +21,11 @@
 		DD6C20281C762DCD00212B17 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C20271C762DCD00212B17 /* ExtensionDelegate.m */; };
 		DD6C202A1C762DCD00212B17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD6C20291C762DCD00212B17 /* Assets.xcassets */; };
 		DD6C20411C76443D00212B17 /* PilotingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C20401C76443D00212B17 /* PilotingViewController.m */; };
-		DD6C20441C764BB000212B17 /* DroneManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DD6C20431C764BB000212B17 /* DroneManager.m */; };
+		DD7A153A1C91235D00854026 /* JRMWatchToDroneGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = DD7A15391C91235D00854026 /* JRMWatchToDroneGestureRecognizer.m */; };
+		DD7A153C1C912FF100854026 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD7A153B1C912FF100854026 /* HealthKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		DD6C1FFC1C762DCD00212B17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DD6C1FDA1C762DCC00212B17 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DD6C1FE11C762DCC00212B17;
-			remoteInfo = WatchToDrone;
-		};
-		DD6C20071C762DCD00212B17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DD6C1FDA1C762DCC00212B17 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DD6C1FE11C762DCC00212B17;
-			remoteInfo = WatchToDrone;
-		};
 		DD6C20111C762DCD00212B17 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DD6C1FDA1C762DCC00212B17 /* Project object */;
@@ -87,18 +72,12 @@
 		DD6C1FE61C762DCD00212B17 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD6C1FE81C762DCD00212B17 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DD6C1FE91C762DCD00212B17 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		DD6C1FEB1C762DCD00212B17 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		DD6C1FEC1C762DCD00212B17 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DD6C1FEB1C762DCD00212B17 /* DroneListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DroneListViewController.h; sourceTree = "<group>"; };
+		DD6C1FEC1C762DCD00212B17 /* DroneListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DroneListViewController.m; sourceTree = "<group>"; };
 		DD6C1FEF1C762DCD00212B17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD6C1FF11C762DCD00212B17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD6C1FF41C762DCD00212B17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD6C1FF61C762DCD00212B17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD6C1FFB1C762DCD00212B17 /* WatchToDroneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatchToDroneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD6C1FFF1C762DCD00212B17 /* WatchToDroneTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WatchToDroneTests.m; sourceTree = "<group>"; };
-		DD6C20011C762DCD00212B17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD6C20061C762DCD00212B17 /* WatchToDroneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WatchToDroneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD6C200A1C762DCD00212B17 /* WatchToDroneUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WatchToDroneUITests.m; sourceTree = "<group>"; };
-		DD6C200C1C762DCD00212B17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD6C200F1C762DCD00212B17 /* WatchToDrone WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchToDrone WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6C20151C762DCD00212B17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		DD6C20171C762DCD00212B17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,8 +91,10 @@
 		DD6C202B1C762DCD00212B17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD6C203F1C76443D00212B17 /* PilotingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PilotingViewController.h; sourceTree = "<group>"; };
 		DD6C20401C76443D00212B17 /* PilotingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PilotingViewController.m; sourceTree = "<group>"; };
-		DD6C20421C764BB000212B17 /* DroneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneManager.h; sourceTree = "<group>"; };
-		DD6C20431C764BB000212B17 /* DroneManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DroneManager.m; sourceTree = "<group>"; };
+		DD7A15381C91235D00854026 /* JRMWatchToDroneGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMWatchToDroneGestureRecognizer.h; sourceTree = "<group>"; };
+		DD7A15391C91235D00854026 /* JRMWatchToDroneGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMWatchToDroneGestureRecognizer.m; sourceTree = "<group>"; };
+		DD7A153B1C912FF100854026 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
+		DD7A153D1C912FF100854026 /* WatchToDrone WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WatchToDrone WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,24 +105,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DD6C1FF81C762DCD00212B17 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD6C20031C762DCD00212B17 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		DD6C201B1C762DCD00212B17 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD7A153C1C912FF100854026 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,10 +120,9 @@
 			isa = PBXGroup;
 			children = (
 				DD6C1FE41C762DCD00212B17 /* WatchToDrone */,
-				DD6C1FFE1C762DCD00212B17 /* WatchToDroneTests */,
-				DD6C20091C762DCD00212B17 /* WatchToDroneUITests */,
 				DD6C20131C762DCD00212B17 /* WatchToDrone WatchKit App */,
 				DD6C20221C762DCD00212B17 /* WatchToDrone WatchKit Extension */,
+				DD7A153E1C91308E00854026 /* Frameworks */,
 				DD6C1FE31C762DCC00212B17 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -164,8 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				DD6C1FE21C762DCC00212B17 /* WatchToDrone.app */,
-				DD6C1FFB1C762DCD00212B17 /* WatchToDroneTests.xctest */,
-				DD6C20061C762DCD00212B17 /* WatchToDroneUITests.xctest */,
 				DD6C200F1C762DCD00212B17 /* WatchToDrone WatchKit App.app */,
 				DD6C201E1C762DCD00212B17 /* WatchToDrone WatchKit Extension.appex */,
 			);
@@ -177,15 +142,12 @@
 			children = (
 				DD6C1FE81C762DCD00212B17 /* AppDelegate.h */,
 				DD6C1FE91C762DCD00212B17 /* AppDelegate.m */,
-				DD6C1FEB1C762DCD00212B17 /* ViewController.h */,
-				DD6C1FEC1C762DCD00212B17 /* ViewController.m */,
-				DD6C203F1C76443D00212B17 /* PilotingViewController.h */,
-				DD6C20401C76443D00212B17 /* PilotingViewController.m */,
-				DD6C20421C764BB000212B17 /* DroneManager.h */,
-				DD6C20431C764BB000212B17 /* DroneManager.m */,
+				DD7A15371C91200400854026 /* ViewControllers */,
+				DD7A15381C91235D00854026 /* JRMWatchToDroneGestureRecognizer.h */,
+				DD7A15391C91235D00854026 /* JRMWatchToDroneGestureRecognizer.m */,
 				DD6C1FEE1C762DCD00212B17 /* Main.storyboard */,
-				DD6C1FF11C762DCD00212B17 /* Assets.xcassets */,
 				DD6C1FF31C762DCD00212B17 /* LaunchScreen.storyboard */,
+				DD6C1FF11C762DCD00212B17 /* Assets.xcassets */,
 				DD6C1FF61C762DCD00212B17 /* Info.plist */,
 				DD6C1FE51C762DCD00212B17 /* Supporting Files */,
 			);
@@ -198,24 +160,6 @@
 				DD6C1FE61C762DCD00212B17 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		DD6C1FFE1C762DCD00212B17 /* WatchToDroneTests */ = {
-			isa = PBXGroup;
-			children = (
-				DD6C1FFF1C762DCD00212B17 /* WatchToDroneTests.m */,
-				DD6C20011C762DCD00212B17 /* Info.plist */,
-			);
-			path = WatchToDroneTests;
-			sourceTree = "<group>";
-		};
-		DD6C20091C762DCD00212B17 /* WatchToDroneUITests */ = {
-			isa = PBXGroup;
-			children = (
-				DD6C200A1C762DCD00212B17 /* WatchToDroneUITests.m */,
-				DD6C200C1C762DCD00212B17 /* Info.plist */,
-			);
-			path = WatchToDroneUITests;
 			sourceTree = "<group>";
 		};
 		DD6C20131C762DCD00212B17 /* WatchToDrone WatchKit App */ = {
@@ -231,6 +175,7 @@
 		DD6C20221C762DCD00212B17 /* WatchToDrone WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DD7A153D1C912FF100854026 /* WatchToDrone WatchKit Extension.entitlements */,
 				DD6C20231C762DCD00212B17 /* InterfaceController.h */,
 				DD6C20241C762DCD00212B17 /* InterfaceController.m */,
 				DD6C20261C762DCD00212B17 /* ExtensionDelegate.h */,
@@ -239,6 +184,25 @@
 				DD6C202B1C762DCD00212B17 /* Info.plist */,
 			);
 			path = "WatchToDrone WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		DD7A15371C91200400854026 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DD6C1FEB1C762DCD00212B17 /* DroneListViewController.h */,
+				DD6C1FEC1C762DCD00212B17 /* DroneListViewController.m */,
+				DD6C203F1C76443D00212B17 /* PilotingViewController.h */,
+				DD6C20401C76443D00212B17 /* PilotingViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DD7A153E1C91308E00854026 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD7A153B1C912FF100854026 /* HealthKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,42 +226,6 @@
 			productName = WatchToDrone;
 			productReference = DD6C1FE21C762DCC00212B17 /* WatchToDrone.app */;
 			productType = "com.apple.product-type.application";
-		};
-		DD6C1FFA1C762DCD00212B17 /* WatchToDroneTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DD6C20391C762DCD00212B17 /* Build configuration list for PBXNativeTarget "WatchToDroneTests" */;
-			buildPhases = (
-				DD6C1FF71C762DCD00212B17 /* Sources */,
-				DD6C1FF81C762DCD00212B17 /* Frameworks */,
-				DD6C1FF91C762DCD00212B17 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DD6C1FFD1C762DCD00212B17 /* PBXTargetDependency */,
-			);
-			name = WatchToDroneTests;
-			productName = WatchToDroneTests;
-			productReference = DD6C1FFB1C762DCD00212B17 /* WatchToDroneTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		DD6C20051C762DCD00212B17 /* WatchToDroneUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DD6C203C1C762DCD00212B17 /* Build configuration list for PBXNativeTarget "WatchToDroneUITests" */;
-			buildPhases = (
-				DD6C20021C762DCD00212B17 /* Sources */,
-				DD6C20031C762DCD00212B17 /* Frameworks */,
-				DD6C20041C762DCD00212B17 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DD6C20081C762DCD00212B17 /* PBXTargetDependency */,
-			);
-			name = WatchToDroneUITests;
-			productName = WatchToDroneUITests;
-			productReference = DD6C20061C762DCD00212B17 /* WatchToDroneUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		DD6C200E1C762DCD00212B17 /* WatchToDrone WatchKit App */ = {
 			isa = PBXNativeTarget;
@@ -346,19 +274,16 @@
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = DB34EU8XZ5;
 					};
-					DD6C1FFA1C762DCD00212B17 = {
-						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = DD6C1FE11C762DCC00212B17;
-					};
-					DD6C20051C762DCD00212B17 = {
-						CreatedOnToolsVersion = 7.2.1;
-						TestTargetID = DD6C1FE11C762DCC00212B17;
-					};
 					DD6C200E1C762DCD00212B17 = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
 					DD6C201D1C762DCD00212B17 = {
 						CreatedOnToolsVersion = 7.2.1;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -376,8 +301,6 @@
 			projectRoot = "";
 			targets = (
 				DD6C1FE11C762DCC00212B17 /* WatchToDrone */,
-				DD6C1FFA1C762DCD00212B17 /* WatchToDroneTests */,
-				DD6C20051C762DCD00212B17 /* WatchToDroneUITests */,
 				DD6C200E1C762DCD00212B17 /* WatchToDrone WatchKit App */,
 				DD6C201D1C762DCD00212B17 /* WatchToDrone WatchKit Extension */,
 			);
@@ -392,20 +315,6 @@
 				DD6C1FF51C762DCD00212B17 /* LaunchScreen.storyboard in Resources */,
 				DD6C1FF21C762DCD00212B17 /* Assets.xcassets in Resources */,
 				DD6C1FF01C762DCD00212B17 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD6C1FF91C762DCD00212B17 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD6C20041C762DCD00212B17 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,26 +343,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD6C20411C76443D00212B17 /* PilotingViewController.m in Sources */,
-				DD6C1FED1C762DCD00212B17 /* ViewController.m in Sources */,
-				DD6C20441C764BB000212B17 /* DroneManager.m in Sources */,
+				DD6C1FED1C762DCD00212B17 /* DroneListViewController.m in Sources */,
+				DD7A153A1C91235D00854026 /* JRMWatchToDroneGestureRecognizer.m in Sources */,
 				DD6C1FEA1C762DCD00212B17 /* AppDelegate.m in Sources */,
 				DD6C1FE71C762DCD00212B17 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD6C1FF71C762DCD00212B17 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DD6C20001C762DCD00212B17 /* WatchToDroneTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD6C20021C762DCD00212B17 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DD6C200B1C762DCD00212B17 /* WatchToDroneUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -469,16 +362,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		DD6C1FFD1C762DCD00212B17 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DD6C1FE11C762DCC00212B17 /* WatchToDrone */;
-			targetProxy = DD6C1FFC1C762DCD00212B17 /* PBXContainerItemProxy */;
-		};
-		DD6C20081C762DCD00212B17 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DD6C1FE11C762DCC00212B17 /* WatchToDrone */;
-			targetProxy = DD6C20071C762DCD00212B17 /* PBXContainerItemProxy */;
-		};
 		DD6C20121C762DCD00212B17 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = DD6C200E1C762DCD00212B17 /* WatchToDrone WatchKit App */;
@@ -604,10 +487,15 @@
 		DD6C202F1C762DCD00212B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "WatchToDrone WatchKit Extension/WatchToDrone WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Matt Wanninger (58B824YB4A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anthony Blatner (BY649VZ3GH)";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer: Anthony Blatner (BY649VZ3GH)";
 				INFOPLIST_FILE = "WatchToDrone WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDrone.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "e43c0b83-fca1-454f-b904-3aa6d73372a9";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -618,10 +506,14 @@
 		DD6C20301C762DCD00212B17 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "WatchToDrone WatchKit Extension/WatchToDrone WatchKit Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "WatchToDrone WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDrone.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -663,7 +555,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Anthony Blatner (BY649VZ3GH)";
 				ENABLE_BITCODE = NO;
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphoneos/staging/usr/include\"";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphonesimulator/staging/usr/include\"";
@@ -686,6 +578,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDrone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "e4becc4f-3c88-4aa4-8b7d-af36079635e1";
 			};
 			name = Debug;
 		};
@@ -719,54 +612,6 @@
 			};
 			name = Release;
 		};
-		DD6C203A1C762DCD00212B17 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = WatchToDroneTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDroneTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatchToDrone.app/WatchToDrone";
-			};
-			name = Debug;
-		};
-		DD6C203B1C762DCD00212B17 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = WatchToDroneTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDroneTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WatchToDrone.app/WatchToDrone";
-			};
-			name = Release;
-		};
-		DD6C203D1C762DCD00212B17 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = WatchToDroneUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDroneUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = WatchToDrone;
-				USES_XCTRUNNER = YES;
-			};
-			name = Debug;
-		};
-		DD6C203E1C762DCD00212B17 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = WatchToDroneUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDroneUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = WatchToDrone;
-				USES_XCTRUNNER = YES;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -786,6 +631,7 @@
 				DD6C20301C762DCD00212B17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DD6C20321C762DCD00212B17 /* Build configuration list for PBXNativeTarget "WatchToDrone WatchKit App" */ = {
 			isa = XCConfigurationList;
@@ -794,6 +640,7 @@
 				DD6C20341C762DCD00212B17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DD6C20361C762DCD00212B17 /* Build configuration list for PBXNativeTarget "WatchToDrone" */ = {
 			isa = XCConfigurationList;
@@ -802,22 +649,7 @@
 				DD6C20381C762DCD00212B17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		DD6C20391C762DCD00212B17 /* Build configuration list for PBXNativeTarget "WatchToDroneTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DD6C203A1C762DCD00212B17 /* Debug */,
-				DD6C203B1C762DCD00212B17 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		DD6C203C1C762DCD00212B17 /* Build configuration list for PBXNativeTarget "WatchToDroneUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DD6C203D1C762DCD00212B17 /* Debug */,
-				DD6C203E1C762DCD00212B17 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
