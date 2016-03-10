@@ -94,7 +94,6 @@
 		DD7A15381C91235D00854026 /* JRMWatchToDroneGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRMWatchToDroneGestureRecognizer.h; sourceTree = "<group>"; };
 		DD7A15391C91235D00854026 /* JRMWatchToDroneGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRMWatchToDroneGestureRecognizer.m; sourceTree = "<group>"; };
 		DD7A153B1C912FF100854026 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.1.sdk/System/Library/Frameworks/HealthKit.framework; sourceTree = DEVELOPER_DIR; };
-		DD7A153D1C912FF100854026 /* WatchToDrone WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "WatchToDrone WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,7 +174,6 @@
 		DD6C20221C762DCD00212B17 /* WatchToDrone WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				DD7A153D1C912FF100854026 /* WatchToDrone WatchKit Extension.entitlements */,
 				DD6C20231C762DCD00212B17 /* InterfaceController.h */,
 				DD6C20241C762DCD00212B17 /* InterfaceController.m */,
 				DD6C20261C762DCD00212B17 /* ExtensionDelegate.h */,
@@ -419,6 +417,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -463,6 +462,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -487,15 +487,15 @@
 		DD6C202F1C762DCD00212B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "WatchToDrone WatchKit Extension/WatchToDrone WatchKit Extension.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Matt Wanninger (58B824YB4A)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Anthony Blatner (BY649VZ3GH)";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer: Anthony Blatner (BY649VZ3GH)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "WatchToDrone WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDrone.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "e43c0b83-fca1-454f-b904-3aa6d73372a9";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -506,7 +506,7 @@
 		DD6C20301C762DCD00212B17 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = "WatchToDrone WatchKit Extension/WatchToDrone WatchKit Extension.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "WatchToDrone WatchKit Extension/Info.plist";
@@ -555,7 +555,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Anthony Blatner (BY649VZ3GH)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				"HEADER_SEARCH_PATHS[sdk=iphoneos*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphoneos/staging/usr/include\"";
 				"HEADER_SEARCH_PATHS[sdk=iphonesimulator*]" = "\"$(SRCROOT)/ARSDK3_iOS_3_8_2/iOS-iphonesimulator/staging/usr/include\"";
@@ -578,7 +578,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jackrabbitmobile.WatchToDrone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e4becc4f-3c88-4aa4-8b7d-af36079635e1";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
