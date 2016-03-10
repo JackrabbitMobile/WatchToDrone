@@ -1,10 +1,10 @@
 
 #import "PilotingViewController.h"
+#import <WatchConnectivity/WatchConnectivity.h>
 #import <libARDiscovery/ARDiscovery.h>
 #import <libARController/ARController.h>
 #import <uthash/uthash.h>
-
-@import WatchConnectivity;
+#import "JRMWatchToDroneGestureRecognizer.h"
 
 void stateChanged (eARCONTROLLER_DEVICE_STATE newState, eARCONTROLLER_ERROR error, void *customData);
 void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DICTIONARY_ELEMENT_t *elementDictionary, void *customData);
@@ -14,6 +14,9 @@ void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DI
 @property (nonatomic) ARCONTROLLER_Device_t *deviceController;
 @property (nonatomic) dispatch_semaphore_t stateSem;
 @property (nonatomic, strong) UIAlertController *alertController;
+@property (nonatomic, strong) JRMWatchToDroneGestureRecognizer *gestureRecognizer;
+@property (nonatomic) DroneState currentState;
+@property (nonatomic, assign) BOOL hasTakenOff;
 
 @end
 
@@ -28,6 +31,10 @@ void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DI
     self.stateSem = dispatch_semaphore_create(0);
     
     self.alertController = [UIAlertController alertControllerWithTitle:[self.service name] message:@"Connecting.." preferredStyle:UIAlertControllerStyleAlert];
+    
+    self.gestureRecognizer = [[JRMWatchToDroneGestureRecognizer alloc] init];
+    
+    self.currentState = DroneStateUnknown;
     
     if ([WCSession isSupported]) {
         WCSession *session = [WCSession defaultSession];
@@ -56,11 +63,9 @@ void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DI
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    if (self.alertController && !self.alertController.isBeingPresented) {
+    if (self.alertController && self.alertController.isBeingPresented) {
         [self dismissViewControllerAnimated:NO completion:nil];
     }
-    self.alertController = [UIAlertController alertControllerWithTitle:[self.service name] message:@"Disconnecting.." preferredStyle:UIAlertControllerStyleAlert];
-    [self presentViewController:self.alertController animated:YES completion:nil];
     
     // in background
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -86,19 +91,15 @@ void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DI
         if (_deviceController != NULL) {
             ARCONTROLLER_Device_Delete(&_deviceController);
         }
-        
-        // dismiss the alert view in main thread
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self dismissViewControllerAnimated:NO completion:nil];
-        });
     });
 }
 
 #pragma mark WCSessionDelegate methods
 
+#pragma mark Watch sessions
+
 - (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message {
     if ((message[@"watchAccData"]) != nil) {
-        
         // Incoming accelerometer data
         NSString *dataString = message[@"watchAccData"];
         NSArray *components = [dataString componentsSeparatedByString:@","];
@@ -107,67 +108,171 @@ void onCommandReceived (eARCONTROLLER_DICTIONARY_KEY commandKey, ARCONTROLLER_DI
         double z = [components[2] doubleValue];
         NSLog(@"X:%f Y:%f Z:%f",x,y,z);
         
+        DroneState newState = [self.gestureRecognizer detectStateWithX:x y:y z:z];
+        NSLog(@"New State: %@", droneValueString(newState));
+        [self sendCommandWithState:newState];
         
     } else if (message[@"workoutState"]) {
         NSLog(@"New HKWorkoutSession state: %@",message[@"workoutState"]);
     } else if (message[@"error"]) {
         NSLog(@"Error: %@",message[@"error"]);
     }
-//    if ((message[@"request"]) != nil) {
-//        NSString *dataString = message[@"request"];
-//        NSArray *components = [dataString componentsSeparatedByString:@","];
-//        double x = [components[0] doubleValue];
-//        double y = [components[1] doubleValue];
-//        double z = [components[2] doubleValue];
-//        NSLog(@"x:%f y:%f z:%f",x,y,z);
-//        DroneState newState = [self.gestureRecognizer detectStateWithX:x y:y z:z];
-//        if (newState == DroneStateTakeOffOrLand && self.currentState != DroneStateTakeOffOrLand) {
-//            if (!self.hasTakenOff) {
-//                [self takeOff];
-//                self.hasTakenOff = YES;
-//            } else {
-//                [self land];
-//                self.hasTakenOff = NO;
-//            }
-//            self.currentState = DroneStateTakeOffOrLand;
-//        } else if (newState == DroneStateForward && self.currentState != DroneStateForward && self.hasTakenOff) {
-//            [self goToHover];
-//            [self pitchForwardTouchDown:nil];
-//            NSLog(@"sent forward command");
-//            self.currentState = DroneStateForward;
-//        } else if (newState == DroneStateBackward && self.currentState != DroneStateBackward && self.hasTakenOff) {
-//            [self goToHover];
-//            [self pitchBackTouchDown:nil];
-//            NSLog(@"sent backward command");
-//            self.currentState = DroneStateBackward;
-//        } else if (newState == DroneStateLeftRoll && self.currentState != DroneStateLeftRoll && self.hasTakenOff) {
-//            [self goToHover];
-//            [self rollLeftTouchDown:nil];
-//            NSLog(@"sent left command");
-//            self.currentState = DroneStateLeftRoll;
-//        } else if (newState == DroneStateRightRoll && self.currentState != DroneStateRightRoll && self.hasTakenOff) {
-//            [self goToHover];
-//            [self rollRightTouchDown:nil];
-//            NSLog(@"sent right command");
-//            self.currentState = DroneStateRightRoll;
-//        } else if (newState == DroneStateClimb && self.currentState != DroneStateClimb && self.hasTakenOff) {
-//            [self goToHover];
-//            [self gazUpTouchDown:nil];
-//            NSLog(@"sent up command");
-//            self.currentState = DroneStateClimb;
-//        } else if (newState == DroneStateDescend && self.currentState != DroneStateDescend && self.hasTakenOff) {
-//            [self goToHover];
-//            NSLog(@"sent down command");
-//            [self gazDownTouchDown:nil];
-//            self.currentState = DroneStateDescend;
-//        } else if ((newState == DroneStateHover || newState == DroneStateUnknown) && self.currentState != DroneStateHover && self.hasTakenOff) {
-//            [self goToHover];
-//            self.currentState = DroneStateHover;
-//        } else {
-//            self.currentState = DroneStateUnknown;
-//        }
-//    }
-//    
+}
+
+- (void)sendCommandWithState:(DroneState)newState {
+    if (newState == DroneStateUnknown) {
+        self.currentState = DroneStateUnknown;
+    } else if (newState == DroneStateTakeOffOrLand && self.currentState != DroneStateTakeOffOrLand) {
+        if (!self.hasTakenOff) {
+            [self takeOff];
+            self.hasTakenOff = YES;
+        } else {
+            [self land];
+            self.hasTakenOff = NO;
+        }
+        self.currentState = DroneStateTakeOffOrLand;
+    } else {
+        if (self.hasTakenOff) {
+            if (newState == DroneStateForward && self.currentState != DroneStateForward) {
+                [self goToHover];
+                [self pitchForwardTouchDown:nil];
+                self.currentState = DroneStateForward;
+            } else if (newState == DroneStateBackward && self.currentState != DroneStateBackward) {
+                [self goToHover];
+                [self pitchBackTouchDown:nil];
+                self.currentState = DroneStateBackward;
+            } else if (newState == DroneStateLeftRoll && self.currentState != DroneStateLeftRoll) {
+                [self goToHover];
+                [self rollLeftTouchDown:nil];
+                self.currentState = DroneStateLeftRoll;
+            } else if (newState == DroneStateRightRoll && self.currentState != DroneStateRightRoll) {
+                [self goToHover];
+                [self rollRightTouchDown:nil];
+                self.currentState = DroneStateRightRoll;
+            } else if (newState == DroneStateClimb && self.currentState != DroneStateClimb) {
+                [self goToHover];
+                [self gazUpTouchDown:nil];
+                self.currentState = DroneStateClimb;
+            } else if (newState == DroneStateDescend && self.currentState != DroneStateDescend) {
+                [self goToHover];
+                [self gazDownTouchDown:nil];
+                self.currentState = DroneStateDescend;
+            } else if ((newState == DroneStateHover || newState == DroneStateUnknown) && self.currentState != DroneStateHover) {
+                [self goToHover];
+                self.currentState = DroneStateHover;
+            }
+        } else {
+            self.currentState = DroneStateUnknown;
+        }
+    }
+}
+
+#pragma mark - IBActions and Commands
+
+#pragma mark Emergency/Takeoff/Landing
+
+- (IBAction)emergencyTapped:(id)sender
+{
+    [self sendPilotingEmergency];
+}
+
+- (void)sendPilotingEmergency {
+    _deviceController->miniDrone->sendPilotingEmergency(_deviceController->miniDrone);
+}
+
+- (IBAction)takeOffTapped:(id)sender {
+    [self takeOff];
+}
+
+- (void)takeOff {
+    _deviceController->miniDrone->sendPilotingTakeOff(_deviceController->miniDrone);
+}
+
+- (IBAction)landTapped:(id)sender {
+    [self land];
+}
+
+- (void)land {
+    _deviceController->miniDrone->sendPilotingLanding(_deviceController->miniDrone);
+}
+
+#pragma mark Gaz
+
+- (IBAction)gazUpTouchDown:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDGaz(_deviceController->miniDrone, 50);
+}
+- (IBAction)gazDownTouchDown:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDGaz(_deviceController->miniDrone, -50);
+}
+
+- (IBAction)gazUpTouchUp:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDGaz(_deviceController->miniDrone, 0);
+}
+- (IBAction)gazDownTouchUp:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDGaz(_deviceController->miniDrone, 0);
+}
+
+#pragma mark Yaw
+- (IBAction)yawLeftTouchDown:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDYaw(_deviceController->miniDrone, -50);
+}
+- (IBAction)yawRightTouchDown:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDYaw(_deviceController->miniDrone, 50);
+}
+
+- (IBAction)yawLeftTouchUp:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDYaw(_deviceController->miniDrone, 0);
+}
+
+- (IBAction)yawRightTouchUp:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDYaw(_deviceController->miniDrone, 0);
+}
+
+#pragma mark Roll
+- (IBAction)rollLeftTouchDown:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDFlag(_deviceController->miniDrone, 1);
+    _deviceController->miniDrone->setPilotingPCMDRoll(_deviceController->miniDrone, -50);
+}
+- (IBAction)rollRightTouchDown:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDFlag(_deviceController->miniDrone, 1);
+    _deviceController->miniDrone->setPilotingPCMDRoll(_deviceController->miniDrone, 50);
+}
+
+- (IBAction)rollLeftTouchUp:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDFlag(_deviceController->miniDrone, 0);
+    _deviceController->miniDrone->setPilotingPCMDRoll(_deviceController->miniDrone, 0);
+}
+- (IBAction)rollRightTouchUp:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDFlag(_deviceController->miniDrone, 0);
+    _deviceController->miniDrone->setPilotingPCMDRoll(_deviceController->miniDrone, 0);
+}
+
+#pragma mark Pitch
+- (IBAction)pitchForwardTouchDown:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDFlag(_deviceController->miniDrone, 1);
+    _deviceController->miniDrone->setPilotingPCMDPitch(_deviceController->miniDrone, 50);
+}
+- (IBAction)pitchBackTouchDown:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDFlag(_deviceController->miniDrone, 1);
+    _deviceController->miniDrone->setPilotingPCMDPitch(_deviceController->miniDrone, -50);
+}
+
+- (IBAction)pitchForwardTouchUp:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDFlag(_deviceController->miniDrone, 0);
+    _deviceController->miniDrone->setPilotingPCMDPitch(_deviceController->miniDrone, 0);
+}
+- (IBAction)pitchBackTouchUp:(id)sender {
+    _deviceController->miniDrone->setPilotingPCMDFlag(_deviceController->miniDrone, 0);
+    _deviceController->miniDrone->setPilotingPCMDPitch(_deviceController->miniDrone, 0);
+}
+
+#pragma mark Hover
+- (void)goToHover {
+    //_deviceController->miniDrone->setPilotingPCMDFlag(_deviceController->miniDrone, 0);
+    _deviceController->miniDrone->setPilotingPCMDPitch(_deviceController->miniDrone, 0);
+    _deviceController->miniDrone->setPilotingPCMDYaw(_deviceController->miniDrone, 0);
+    _deviceController->miniDrone->setPilotingPCMDRoll(_deviceController->miniDrone, 0);
+    _deviceController->miniDrone->setPilotingPCMDGaz(_deviceController->miniDrone, 0);
 }
 
 

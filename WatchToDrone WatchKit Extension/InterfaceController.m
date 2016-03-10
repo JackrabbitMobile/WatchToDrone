@@ -36,25 +36,13 @@
         [session activateSession];
     }
     self.motionManager = [[CMMotionManager alloc] init];
-    self.motionManager.accelerometerUpdateInterval = 0.4;
+    self.motionManager.accelerometerUpdateInterval = 0.25;
 
     self.healthStore = [[HKHealthStore alloc] init];
 }
 
 - (void)willActivate {
     [super willActivate];
-    
-//    [[NSProcessInfo processInfo] performExpiringActivityWithReason:@"AccData" usingBlock:^(BOOL expired) {
-//        [self.motionManager startAccelerometerUpdatesToQueue:self.motionQueue withHandler:^(CMAccelerometerData *accel, NSError *error){
-//            CMAcceleration a = accel.acceleration;
-//            [self.xLabel setText:[NSString stringWithFormat:@"X: %f",a.x]];
-//            [self.yLabel setText:[NSString stringWithFormat:@"Y: %f",a.y]];
-//            [self.zLabel setText:[NSString stringWithFormat:@"Z: %f",a.z]];
-//            NSDictionary *message = @{@"watchAccData":[NSString stringWithFormat:@"%f,%f,%f",a.x,a.y,a.z]};
-//            [[WCSession defaultSession] sendMessage:message replyHandler:nil errorHandler:nil];
-//        }];
-//    }];
-
 }
 
 - (void)didDeactivate {
@@ -63,6 +51,7 @@
 
 - (void)dealloc {
     [self.healthStore endWorkoutSession:self.session];
+    [self.motionManager stopAccelerometerUpdates];
 }
 
 #pragma mark - HKWorkoutSessionDelegate methods
@@ -105,6 +94,10 @@
     if (self.session) {
         [self.healthStore endWorkoutSession:self.session];
         self.session = nil;
+        [self.motionManager stopAccelerometerUpdates];
+        [self.xLabel setText:@"X: n/a"];
+        [self.yLabel setText:@"Y: n/a"];
+        [self.zLabel setText:@"Z: n/a"];
         [self.sessionButton setTitle:@"Start Session"];
     } else {
         self.session = [[HKWorkoutSession alloc] initWithActivityType:HKWorkoutActivityTypeRunning locationType:HKWorkoutSessionLocationTypeIndoor];

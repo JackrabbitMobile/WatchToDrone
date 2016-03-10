@@ -1,9 +1,9 @@
 
 #import "DroneListViewController.h"
+#import <WatchConnectivity/WatchConnectivity.h>
 #import "PilotingViewController.h"
 #import <libARDiscovery/ARDISCOVERY_BonjourDiscovery.h>
-
-@import WatchConnectivity;
+#import "JRMWatchToDroneGestureRecognizer.h"
 
 @interface CellData ()
 @end
@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) ARService *serviceSelected;
 @property (nonatomic, strong) NSArray *tableData;
+@property (nonatomic, strong) JRMWatchToDroneGestureRecognizer *gestureRecognizer;
 
 @end
 
@@ -26,11 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.tableData = [NSArray array];
-    
-    //self.gestureRecognizer = [[JRWatchGestureRecognizer alloc] init];
-    
+    self.gestureRecognizer = [[JRMWatchToDroneGestureRecognizer alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -60,6 +58,33 @@
     if(([segue.identifier isEqualToString:@"pilotingSegue"]) && (self.serviceSelected != nil)) {
         PilotingViewController *pilotingViewController = (PilotingViewController *)[segue destinationViewController];
         [pilotingViewController setService:self.serviceSelected];
+    }
+}
+
+#pragma mark - WCSessionDelegate methods
+
+- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *,id> *)message {
+    // This WCSession implementation for debugging purposes only.
+    // Must actually be connected to a drone in PilotingViewController to
+    // send commands to the Parrot drone.
+    
+    
+    if ((message[@"watchAccData"]) != nil) {
+        // Incoming accelerometer data
+        NSString *dataString = message[@"watchAccData"];
+        NSArray *components = [dataString componentsSeparatedByString:@","];
+        double x = [components[0] doubleValue];
+        double y = [components[1] doubleValue];
+        double z = [components[2] doubleValue];
+        NSLog(@"X:%f Y:%f Z:%f",x,y,z);
+        
+        DroneState newState = [self.gestureRecognizer detectStateWithX:x y:y z:z];
+        NSLog(@"New State: %@", droneValueString(newState));
+        
+    } else if (message[@"workoutState"]) {
+        NSLog(@"New HKWorkoutSession state: %@",message[@"workoutState"]);
+    } else if (message[@"error"]) {
+        NSLog(@"Error: %@",message[@"error"]);
     }
 }
 
