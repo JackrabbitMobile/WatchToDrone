@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSOperationQueue *motionQueue;
 @property (nonatomic, strong) HKHealthStore *healthStore;
 @property (nonatomic, strong) HKWorkoutSession *session;
+@property (nonatomic, assign) BOOL sessionHasStarted;
 
 @end
 
@@ -36,7 +37,7 @@
         [session activateSession];
     }
     self.motionManager = [[CMMotionManager alloc] init];
-    self.motionManager.accelerometerUpdateInterval = 0.25;
+    self.motionManager.accelerometerUpdateInterval = 0.5;
 
     self.healthStore = [[HKHealthStore alloc] init];
 }
@@ -72,12 +73,14 @@
     
     [[NSProcessInfo processInfo] performExpiringActivityWithReason:@"AccData" usingBlock:^(BOOL expired) {
         [self.motionManager startAccelerometerUpdatesToQueue:self.motionQueue withHandler:^(CMAccelerometerData *accel, NSError *error){
-            CMAcceleration a = accel.acceleration;
-            [self.xLabel setText:[NSString stringWithFormat:@"X: %f",a.x]];
-            [self.yLabel setText:[NSString stringWithFormat:@"Y: %f",a.y]];
-            [self.zLabel setText:[NSString stringWithFormat:@"Z: %f",a.z]];
-            NSDictionary *message = @{@"watchAccData":[NSString stringWithFormat:@"%f,%f,%f",a.x,a.y,a.z]};
-            [[WCSession defaultSession] sendMessage:message replyHandler:nil errorHandler:nil];
+            if (self.sessionHasStarted) {
+                CMAcceleration a = accel.acceleration;
+                [self.xLabel setText:[NSString stringWithFormat:@"X: %f",a.x]];
+                [self.yLabel setText:[NSString stringWithFormat:@"Y: %f",a.y]];
+                [self.zLabel setText:[NSString stringWithFormat:@"Z: %f",a.z]];
+                NSDictionary *message = @{@"watchAccData":[NSString stringWithFormat:@"%f,%f,%f",a.x,a.y,a.z]};
+                [[WCSession defaultSession] sendMessage:message replyHandler:nil errorHandler:nil];
+            }
         }];
     }];
 }
@@ -98,11 +101,13 @@
         [self.xLabel setText:@"X: n/a"];
         [self.yLabel setText:@"Y: n/a"];
         [self.zLabel setText:@"Z: n/a"];
+        self.sessionHasStarted = NO;
         [self.sessionButton setTitle:@"Start Session"];
     } else {
         self.session = [[HKWorkoutSession alloc] initWithActivityType:HKWorkoutActivityTypeRunning locationType:HKWorkoutSessionLocationTypeIndoor];
         self.session.delegate = self;
         [self.healthStore startWorkoutSession:self.session];
+        self.sessionHasStarted = YES;
         [self.sessionButton setTitle:@"Stop Session"];
     }
 }
