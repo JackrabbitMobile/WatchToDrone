@@ -25,8 +25,9 @@ Turn on your Parrot mini drone, and ensure the front lights have changed to gree
 
 Going back to the app, you should see your drone populated in the list, assuming no other device or app is currently attached to it:
 
-
-Before tapping on it to connect, let's make sure the watch app is working. Open the WatchToDrone app on your Apple Watch and tap "Start Session".
+Before tapping on it to connect, let's make sure the watch app is working. Open the WatchToDrone app on your Apple Watch and tap "Start Session":
+![alt tag](http://i.imgur.com/df9E0YZ.png)
 You should start to see accelerometer readings on both the watch screen and in the Xcode debug console for your iOS device, assuming you're running in debug mode. If you see this, then watch communication with the iOS device is working correctly.
+![alt tag](http://i.imgur.com/BGBtIdh.png)
 
 Now, tap your drone's name the list. Upon successful connection to the device, you'll now have on-screen controls - and, assuming your watch app is running, you can start to issue movement commands to the drone via the watch gestures outlined here.
