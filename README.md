@@ -19,11 +19,15 @@ Check Parrot's FreeFlight 3 App on iOS or Android to check your firmware version
 
 Assuming you're now up and running, you should see a blank table with WatchToDrone at the top:
 
+![alt tag](http://i.imgur.com/8u3nRDv.png?1)
 
 Turn on your Parrot mini drone, and ensure the front lights have changed to green:
 
+![alt tag](http://i.imgur.com/KCGsZ9c.jpg?2)
 
 Going back to the app, you should see your drone populated in the list, assuming no other device or app is currently attached to it:
+
+![alt tag](http://i.imgur.com/m3dcHhi.png?1)
 
 Before tapping on it to connect, let's make sure the watch app is working. Open the WatchToDrone app on your Apple Watch and tap "Start Session":
 
