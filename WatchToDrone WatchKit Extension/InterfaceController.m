@@ -37,7 +37,7 @@
         [session activateSession];
     }
     self.motionManager = [[CMMotionManager alloc] init];
-    self.motionManager.accelerometerUpdateInterval = 0.5;
+    self.motionManager.accelerometerUpdateInterval = 0.3;
 
     self.healthStore = [[HKHealthStore alloc] init];
 }
