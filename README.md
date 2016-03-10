@@ -1,2 +1,32 @@
 # WatchToDrone
-Sample code for controlling a Parrot drone via Apple Watch gestures. 
+Sample code for controlling a Parrot mini drone via Apple Watch gestures.
+
+####Requirements
+- iOS 9.0+ device (need a real device for Parrot's ARDiscovery to successfully scan for BTLE devices).
+- Apple Watch running WatchOS 2.0+ (required for access to the accelerometer :)
+
+Tested on Airborne Cargo running 2.1.55 firmware. Should run on any Parrot mini drone. 
+Check Parrot's FreeFlight 3 App on iOS or Android to check your firmware version or upgrade to the latest firmware over Bluetooth. Also, you can go to http://www.parrot.com/usa/support/ and select your Parrot Mini-Drone to initiate a faster firmware update over USB.
+
+####Instructions
+
+- Download and open the project.
+- Create an App ID for both the iOS and Apple WatchKit extension in the iOS Developer Center
+  - For the Apple WatchKit extension target, ensure Health Kit entitlements are enabled.
+  - Create any necessary development provisioning profiles and set these under your Code Signing settings.
+  - Change your parent app and WatchKit extension bundle identifiers to match your new app ids, if necessary.
+- Run the app on an iOS 9 device with an Apple Watch running WatchOS 2.0+
+
+Assuming you're now up and running, you should see a blank table with WatchToDrone at the top:
+
+
+Turn on your Parrot mini drone, and ensure the front lights have changed to green:
+
+
+Going back to the app, you should see your drone populated in the list, assuming no other device or app is currently attached to it:
+
+
+Before tapping on it to connect, let's make sure the watch app is working. Open the WatchToDrone app on your Apple Watch and tap "Start Session".
+You should start to see accelerometer readings on both the watch screen and in the Xcode debug console for your iOS device, assuming you're running in debug mode. If you see this, then watch communication with the iOS device is working correctly.
+
+Now, tap your drone's name the list. Upon successful connection to the device, you'll now have on-screen controls - and, assuming your watch app is running, you can start to issue movement commands to the drone via the watch gestures outlined here.
