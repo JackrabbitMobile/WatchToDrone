@@ -24,7 +24,7 @@ Assuming you're now up and running, you should see a blank table with WatchToDro
 
 Turn on your Parrot mini drone, and make sure the front lights have changed to green:
 
-![alt tag](http://i.imgur.com/KCGsZ9c.jpg?2)
+![alt tag](http://i.imgur.com/dQrUVcQm.jpg)
 
 Going back to the app, you should see your drone populated in the list, assuming no other device or app is currently connected to it:
 
