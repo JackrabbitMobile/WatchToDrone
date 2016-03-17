@@ -20,7 +20,7 @@ Also, you can go to http://www.parrot.com/usa/support/ and select your Parrot Mi
 
 Assuming you're now up and running, you should see a blank table with WatchToDrone at the top:
 
-![alt tag](http://i.imgur.com/8u3nRDv.png?1)
+![alt tag](http://i.imgur.com/vlou2dlm.png)
 
 Turn on your Parrot mini drone, and make sure the front lights have changed to green:
 
@@ -28,7 +28,7 @@ Turn on your Parrot mini drone, and make sure the front lights have changed to g
 
 Going back to the app, you should see your drone populated in the list, assuming no other device or app is currently connected to it:
 
-![alt tag](http://i.imgur.com/m3dcHhi.png?1)
+![alt tag](http://i.imgur.com/aQUB2MLm.png)
 
 Before tapping on it to connect, let's make sure the watch app is working. Open the WatchToDrone app on your Apple Watch and tap "Start Session":
 
