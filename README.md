@@ -16,6 +16,7 @@ Also, you can go to http://www.parrot.com/usa/support/ and select your Parrot Mi
   - For the Apple WatchKit extension target, ensure Health Kit entitlements are enabled.
   - Create any necessary development provisioning profiles and set these under your Code Signing settings.
   - Change your parent app and WatchKit extension bundle identifiers to match your new app ids, if necessary.
+  - Also check that the Watch App's Info.plist has the correct WKCompanionAppBundleIdentifier and that the WatchKit extension's Info.plist has the correct WKAppBundleIdentifier.
 - Run the app on an iOS 9 device with an Apple Watch running WatchOS 2.0+.
 
 Assuming you're now up and running, you should see a blank table with WatchToDrone at the top:
@@ -39,3 +40,5 @@ You should start to see accelerometer readings on both the watch screen and in t
 ![alt tag](http://i.imgur.com/BGBtIdh.png)
 
 Now, tap your drone's name the list. Upon successful connection to the device, you'll now have on-screen controls - and, assuming your watch app is running, you can start to issue movement commands to the drone via the watch gestures outlined here: (still need link to watch gestures with images)
+
+When done, press "Stop Session" to stop accelerometer capture on your Apple Watch and end the HKWorkoutSession (unless you want it to drain your battery all day :)).
