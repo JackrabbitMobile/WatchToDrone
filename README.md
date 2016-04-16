@@ -39,6 +39,7 @@ You should start to see accelerometer readings on both the watch screen and in t
 
 ![alt tag](http://i.imgur.com/BGBtIdh.png)
 
-Now, tap your drone's name the list. Upon successful connection to the device, you'll now have on-screen controls - and, assuming your watch app is running, you can start to issue movement commands to the drone via the watch gestures outlined here: (still need link to watch gestures with images)
+Now, tap your drone's name the list. Upon successful connection to the device, you'll now have on-screen controls - and, assuming your watch app is running, you can start to issue movement commands to the drone via the watch gestures outlined here:
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/IDrZdVHqQt0/0.jpg)](https://www.youtube.com/watch?v=IDrZdVHqQt0E)
 
 When done, press "Stop Session" to stop accelerometer capture on your Apple Watch and end the HKWorkoutSession (unless you want it to drain your battery all day :)).
